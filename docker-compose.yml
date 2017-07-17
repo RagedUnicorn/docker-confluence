@@ -1,0 +1,35 @@
+version: '3.3'
+services:
+  confluence:
+    build: .
+    image: ragedunicorn/confluence:1.0.0-stable
+    volumes:
+      - confluence_data:/var/atlassian/confluence
+      - confluence_logs:/opt/atlassian/confluence_logs/logs
+    depends_on:
+      - postgresql
+    networks:
+      - confluence
+    ports:
+      - "8090:8090"
+    labels:
+      com.ragedunicorn.confluence.environment: "prod"
+      com.ragedunicorn.confluence.description: "Confluence"
+  postgresql:
+    image: ragedunicorn/postgresql:1.0.0-stable
+    volumes:
+      - postgresql_data:/var/lib/postgresql
+    networks:
+      - confluence
+    expose:
+      - "5432"
+    labels:
+      com.ragedunicorn.postgresql.environment: "prod"
+      com.ragedunicorn.postgresql.description: "PostgreSQL"
+volumes:
+  confluence_data: {}
+  confluence_logs: {}
+  postgresql_data: {}
+networks:
+  confluence:
+    driver: bridge
