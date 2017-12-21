@@ -12,6 +12,11 @@ services:
       - confluence
     ports:
       - "8090:8090"
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "8090"]
+      interval: 1m
+      timeout: 10s
+      retries: 3
     labels:
       com.ragedunicorn.confluence.environment: "prod"
       com.ragedunicorn.confluence.description: "Confluence"
@@ -23,6 +28,11 @@ services:
       - confluence
     expose:
       - "5432"
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      interval: 1m
+      timeout: 10s
+      retries: 3
     labels:
       com.ragedunicorn.postgresql.environment: "prod"
       com.ragedunicorn.postgresql.description: "PostgreSQL"
