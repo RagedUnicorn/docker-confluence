@@ -15,7 +15,7 @@ services:
       com.ragedunicorn.confluence.environment: "prod"
       com.ragedunicorn.confluence.description: "Confluence"
   postgresql:
-    image: ragedunicorn/postgresql:1.0.0-stable
+    image: ragedunicorn/postgresql:1.0.3-stable
     volumes:
       - postgresql_data:/var/lib/postgresql
     networks:
