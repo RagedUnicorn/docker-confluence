@@ -5,4 +5,4 @@
 # abort when trying to use unset variable
 set -o nounset
 
-/opt/atlassian/confluence/bin/catalina.sh run
+exec su-exec ${CONFLUENCE_USER} /opt/atlassian/confluence/bin/catalina.sh run
