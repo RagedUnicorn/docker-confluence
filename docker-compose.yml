@@ -5,7 +5,7 @@ services:
     image: ragedunicorn/confluence:1.0.1-stable
     volumes:
       - confluence_data:/var/atlassian/confluence
-      - confluence_logs:/opt/atlassian/confluence_logs/logs
+      - confluence_logs:/opt/atlassian/confluence/logs
     depends_on:
       - postgresql
     networks:
