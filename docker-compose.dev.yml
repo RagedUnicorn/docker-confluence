@@ -8,8 +8,6 @@ services:
       - confluence_logs:/opt/atlassian/confluence/logs
     depends_on:
       - postgresql
-    networks:
-      - confluence
     ports:
       - "8090:8090"
     stdin_open: true
@@ -22,8 +20,6 @@ services:
     image: ragedunicorn/postgresql:1.0.3-dev
     volumes:
       - postgresql_data:/var/lib/postgresql
-    networks:
-      - confluence
     expose:
       - "5432"
     stdin_open: true
@@ -36,6 +32,3 @@ volumes:
   confluence_data: {}
   confluence_logs: {}
   postgresql_data: {}
-networks:
-  confluence:
-    driver: bridge
