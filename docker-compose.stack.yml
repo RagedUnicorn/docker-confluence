@@ -10,7 +10,7 @@ services:
     ports:
       - "8090:8090"
     healthcheck:
-      test: ["CMD", "nc", "-z", "localhost", "8090"]
+      test: ["CMD", "/docker-healthcheck.sh"]
       interval: 1m
       timeout: 10s
       retries: 3
@@ -25,7 +25,7 @@ services:
       - com.ragedunicorn.postgresql.app_user
       - com.ragedunicorn.postgresql.app_user_password
     healthcheck:
-      test: ["CMD", "pg_isready"]
+      test: ["CMD", "/docker-healthcheck.sh"]
       interval: 1m
       timeout: 10s
       retries: 3

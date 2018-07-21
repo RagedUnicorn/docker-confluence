@@ -50,11 +50,15 @@ RUN \
   chown -R "${CONFLUENCE_USER}":"${CONFLUENCE_GROUP}" "${CONFLUENCE_INSTALL}/conf"; \
   echo -e "\nconfluence.home=${CONFLUENCE_HOME}" >> "${CONFLUENCE_INSTALL}/confluence/WEB-INF/classes/confluence-init.properties"
 
+# add healthcheck script
+COPY docker-healthcheck.sh /
+
 # add launch script
 COPY docker-entrypoint.sh /
 
 RUN \
-  chmod 755 docker-entrypoint.sh
+  chmod 755 docker-entrypoint.sh && \
+  chmod 755 /docker-healthcheck.sh
 
 EXPOSE 8090
 

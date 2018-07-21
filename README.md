@@ -92,6 +92,10 @@ Stopping the running container
 sh dockery/dstop.sh
 ```
 
+## Healthcheck
+
+The production and the stack image supports a simple healthcheck showing whether the container is healthy or not. This can be configured inside `docker-compose.yml` or `docker-compose.stack.yml`
+
 ## Development
 
 To debug the container and get more insight into the container use the `docker-compose.dev.yml` configuration.
