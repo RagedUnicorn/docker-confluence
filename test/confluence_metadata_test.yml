@@ -1,0 +1,18 @@
+schemaVersion: 2.0.0
+
+metadataTest:
+  env:
+    - key: 'CONFLUENCE_USER'
+      value: 'confluence'
+    - key: 'CONFLUENCE_GROUP'
+      value: 'confluence'
+    - key: 'CONFLUENCE_HOME'
+      value: '/var/atlassian/confluence'
+    - key: 'CONFLUENCE_INSTALL'
+      value: '/opt/atlassian/confluence'
+  labels:
+    - key: 'com.ragedunicorn.maintainer'
+      value: 'Michael Wiesendanger <michael.wiesendanger@gmail.com>'
+  exposedPorts: ["8090"]
+  volumes: ["/var/atlassian/confluence", "/opt/atlassian/confluence/logs"]
+  entrypoint: ["/docker-entrypoint.sh"]

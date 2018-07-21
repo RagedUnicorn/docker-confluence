@@ -1,0 +1,15 @@
+schemaVersion: 2.0.0
+
+fileExistenceTests:
+- name: 'confluence_start'
+  path: '/opt/atlassian/confluence/bin/start-confluence.sh'
+  shouldExist: true
+  permissions: '-rwxr-xr-x'
+- name: 'confluence_setenv'
+  path: '/opt/atlassian/confluence/bin/setenv.sh'
+  shouldExist: true
+  permissions: '-rwxr-xr-x'
+- name: 'docker_entrypoint'
+  path: '/docker-entrypoint.sh'
+  shouldExist: true
+  permissions: '-rwxr-xr-x'
