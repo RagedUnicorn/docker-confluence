@@ -27,6 +27,8 @@ ENV \
 # explicitly set user/group IDs
 RUN addgroup -S "${CONFLUENCE_GROUP}" -g 9999 && adduser -S -G "${CONFLUENCE_GROUP}" -u 9999 "${CONFLUENCE_USER}"
 
+WORKDIR /home
+
 RUN \
   set -ex; \
   apk add --no-cache \
