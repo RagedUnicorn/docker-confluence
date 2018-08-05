@@ -92,6 +92,16 @@ Stopping the running container
 sh dockery/dstop.sh
 ```
 
+## Configuration
+
+#### Build Args
+
+The image allows for certain arguments being overridden by build args.
+
+`CONFLUENCE_USER, CONFLUENCE_GROUP`
+
+They all have a default value and don't have to be overridden. For details see the Dockerfile.
+
 ## Persistence
 
 The container is storing data in the docker volume configured by the environment variable `${CONFLUENCE_DATA_DIR}` and `${CONFLUENCE_LOGS_DIR}`.
