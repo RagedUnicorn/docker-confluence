@@ -14,8 +14,7 @@ ARG CONFLUENCE_GROUP=confluence
 
 ENV \
   CONFLUENCE_VERSION=6.3.1 \
-  SU_EXEC_VERSION=0.2-r0 \
-  CURL_VERSION=7.61.0-r0
+  SU_EXEC_VERSION=0.2-r0
 
 ENV \
   CONFLUENCE_USER="${CONFLUENCE_USER}" \
@@ -32,16 +31,20 @@ RUN \
   set -ex; \
   apk add --no-cache \
     su-exec="${SU_EXEC_VERSION}" \
-    curl="${CURL_VERSION}"; \
   mkdir -p "${CONFLUENCE_HOME}"; \
   mkdir -p  "${CONFLUENCE_HOME}/caches/indexes"; \
   chmod -R 700 "${CONFLUENCE_HOME}"; \
   chown -R "${CONFLUENCE_USER}":"${CONFLUENCE_GROUP}" "${CONFLUENCE_HOME}"; \
   mkdir -p "${CONFLUENCE_INSTALL}/conf/Catalina"; \
-  curl --location "https://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-${CONFLUENCE_VERSION}.tar.gz" \
-    | tar -xz --directory "${CONFLUENCE_INSTALL}" --strip-components=1 --no-same-owner; \
-  curl --location "https://jdbc.postgresql.org/download/postgresql-9.4.1212.jar" \
-    -o "${CONFLUENCE_INSTALL}/lib/postgresql-9.4.1212.jar"; \
+  if ! wget -q "https://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-${CONFLUENCE_VERSION}.tar.gz"; then \
+    echo >&2 "Error: Failed to download Confluence binary"; \
+    exit 1; \
+  fi && \
+  tar zxf atlassian-confluence-"${CONFLUENCE_VERSION}".tar.gz --directory  "${CONFLUENCE_INSTALL}" --strip-components=1 --no-same-owner && \
+  if ! wget -q "https://jdbc.postgresql.org/download/postgresql-9.4.1212.jar" -P "${CONFLUENCE_INSTALL}/lib/"; then \
+    echo >&2 "Error: Failed to download Postgresql driver"; \
+    exit 1; \
+  fi && \
   chmod -R 700 "${CONFLUENCE_INSTALL}/logs"; \
   chmod -R 700 "${CONFLUENCE_INSTALL}/temp"; \
   chmod -R 700 "${CONFLUENCE_INSTALL}/work"; \
