@@ -92,6 +92,10 @@ Stopping the running container
 sh dockery/dstop.sh
 ```
 
+## Persistence
+
+The container is storing data in the docker volume configured by the environment variable `${CONFLUENCE_DATA_DIR}` and `${CONFLUENCE_LOGS_DIR}`.
+
 ## Healthcheck
 
 The production and the stack image supports a simple healthcheck showing whether the container is healthy or not. This can be configured inside `docker-compose.yml` or `docker-compose.stack.yml`
