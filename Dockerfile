@@ -21,7 +21,9 @@ ENV \
   CONFLUENCE_USER="${CONFLUENCE_USER}" \
   CONFLUENCE_GROUP="${CONFLUENCE_GROUP}" \
   CONFLUENCE_HOME=/var/atlassian/confluence \
-  CONFLUENCE_INSTALL=/opt/atlassian/confluence
+  CONFLUENCE_INSTALL=/opt/atlassian/confluence \
+  CONFLUENCE_DATA_DIR=/var/atlassian/confluence \
+  CONFLUENCE_LOGS_DIR=/opt/atlassian/confluence/logs
 
 # explicitly set user/group IDs
 RUN addgroup -S "${CONFLUENCE_GROUP}" -g 9999 && adduser -S -G "${CONFLUENCE_GROUP}" -u 9999 "${CONFLUENCE_USER}"
@@ -65,6 +67,6 @@ EXPOSE 8090
 # Set volume mount points for installation and home directory. Changes to the
 # home directory needs to be persisted as well as parts of the installation
 # directory due to eg. logs.
-VOLUME ["/var/atlassian/confluence", "/opt/atlassian/confluence/logs"]
+VOLUME ["${CONFLUENCE_DATA_DIR}", "${CONFLUENCE_LOGS_DIR}"]
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
