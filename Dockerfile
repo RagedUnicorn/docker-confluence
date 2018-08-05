@@ -30,12 +30,12 @@ RUN addgroup -S "${CONFLUENCE_GROUP}" -g 9999 && adduser -S -G "${CONFLUENCE_GRO
 RUN \
   set -ex; \
   apk add --no-cache \
-    su-exec="${SU_EXEC_VERSION}" \
-  mkdir -p "${CONFLUENCE_HOME}"; \
-  mkdir -p  "${CONFLUENCE_HOME}/caches/indexes"; \
-  chmod -R 700 "${CONFLUENCE_HOME}"; \
-  chown -R "${CONFLUENCE_USER}":"${CONFLUENCE_GROUP}" "${CONFLUENCE_HOME}"; \
-  mkdir -p "${CONFLUENCE_INSTALL}/conf/Catalina"; \
+    su-exec="${SU_EXEC_VERSION}" && \
+  mkdir -p "${CONFLUENCE_HOME}" && \
+  mkdir -p  "${CONFLUENCE_HOME}/caches/indexes" && \
+  chmod -R 700 "${CONFLUENCE_HOME}" && \
+  chown -R "${CONFLUENCE_USER}":"${CONFLUENCE_GROUP}" "${CONFLUENCE_HOME}" && \
+  mkdir -p "${CONFLUENCE_INSTALL}/conf/Catalina" && \
   if ! wget -q "https://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-${CONFLUENCE_VERSION}.tar.gz"; then \
     echo >&2 "Error: Failed to download Confluence binary"; \
     exit 1; \
@@ -45,14 +45,14 @@ RUN \
     echo >&2 "Error: Failed to download Postgresql driver"; \
     exit 1; \
   fi && \
-  chmod -R 700 "${CONFLUENCE_INSTALL}/logs"; \
-  chmod -R 700 "${CONFLUENCE_INSTALL}/temp"; \
-  chmod -R 700 "${CONFLUENCE_INSTALL}/work"; \
-  chmod -R 700 "${CONFLUENCE_INSTALL}/conf"; \
-  chown -R "${CONFLUENCE_USER}":"${CONFLUENCE_GROUP}" "${CONFLUENCE_INSTALL}/logs"; \
-  chown -R "${CONFLUENCE_USER}":"${CONFLUENCE_GROUP}" "${CONFLUENCE_INSTALL}/temp"; \
-  chown -R "${CONFLUENCE_USER}":"${CONFLUENCE_GROUP}" "${CONFLUENCE_INSTALL}/work"; \
-  chown -R "${CONFLUENCE_USER}":"${CONFLUENCE_GROUP}" "${CONFLUENCE_INSTALL}/conf"; \
+  chmod -R 700 "${CONFLUENCE_INSTALL}/logs" && \
+  chmod -R 700 "${CONFLUENCE_INSTALL}/temp" && \
+  chmod -R 700 "${CONFLUENCE_INSTALL}/work" && \
+  chmod -R 700 "${CONFLUENCE_INSTALL}/conf" && \
+  chown -R "${CONFLUENCE_USER}":"${CONFLUENCE_GROUP}" "${CONFLUENCE_INSTALL}/logs" && \
+  chown -R "${CONFLUENCE_USER}":"${CONFLUENCE_GROUP}" "${CONFLUENCE_INSTALL}/temp" && \
+  chown -R "${CONFLUENCE_USER}":"${CONFLUENCE_GROUP}" "${CONFLUENCE_INSTALL}/work" && \
+  chown -R "${CONFLUENCE_USER}":"${CONFLUENCE_GROUP}" "${CONFLUENCE_INSTALL}/conf" && \
   echo -e "\nconfluence.home=${CONFLUENCE_HOME}" >> "${CONFLUENCE_INSTALL}/confluence/WEB-INF/classes/confluence-init.properties"
 
 # add healthcheck script
