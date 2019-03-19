@@ -1,4 +1,4 @@
-version: '3.6'
+version: '3.7'
 services:
   confluence:
     image: ragedunicorn/confluence:1.1.0-stable
