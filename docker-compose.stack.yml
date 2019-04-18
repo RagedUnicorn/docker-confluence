@@ -5,6 +5,9 @@ services:
     volumes:
       - confluence_data:/var/atlassian/confluence
       - confluence_logs:/opt/atlassian/confluence/logs
+    environment:
+      POSTGRESQL_DATABASE_HOSTNAME: "postgresql"
+      CONFLUENCE_DATABASE_NAME: "confluence"
     depends_on:
       - postgresql
     ports:

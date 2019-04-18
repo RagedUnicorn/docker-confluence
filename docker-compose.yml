@@ -6,6 +6,11 @@ services:
     volumes:
       - confluence_data:/var/atlassian/confluence
       - confluence_logs:/opt/atlassian/confluence/logs
+    environment:
+      POSTGRESQL_APP_USER: "app"
+      POSTGRESQL_APP_PASSWORD: "app"
+      POSTGRESQL_DATABASE_HOSTNAME: "postgresql"
+      CONFLUENCE_DATABASE_NAME: "confluence"
     depends_on:
       - postgresql
     ports:
@@ -23,6 +28,9 @@ services:
     image: ragedunicorn/postgresql:${POSTGRESQL_TAG_VERSION}-stable
     volumes:
       - postgresql_data:/var/lib/postgresql
+    environment:
+      POSTGRESQL_APP_USER: "app"
+      POSTGRESQL_APP_PASSWORD: "app"
     expose:
       - "5432"
     healthcheck:

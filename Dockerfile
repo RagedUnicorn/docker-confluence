@@ -14,6 +14,7 @@ ARG CONFLUENCE_GROUP=confluence
 
 ENV \
   CONFLUENCE_VERSION=6.15.1 \
+  POSTGRESQL_VERSION=11.2-r0 \
   SU_EXEC_VERSION=0.2-r0 \
   XMLSTARLET_VERSION=1.6.1-r0 \
   GCOMPAT_VERSION=0.3.0-r0 \
@@ -42,6 +43,7 @@ RUN \
     libc6-compat="${LIBC6_COMPAT_VERSION}" \
     gcompat="${GCOMPAT_VERSION}" \
     xmlstarlet="${XMLSTARLET_VERSION}" \
+    postgresql="${POSTGRESQL_VERSION}" \
     su-exec="${SU_EXEC_VERSION}" && \
   mkdir -p "${CONFLUENCE_HOME}" && \
   mkdir -p  "${CONFLUENCE_HOME}/caches/indexes" && \
