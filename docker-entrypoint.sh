@@ -4,4 +4,4 @@
 
 set -euo pipefail
 
-exec su-exec ${CONFLUENCE_USER} /opt/atlassian/confluence/bin/catalina.sh run
+exec su-exec ${CONFLUENCE_USER} /opt/atlassian/confluence/bin/start-confluence.sh -fg
